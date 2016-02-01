@@ -15,12 +15,10 @@ namespace VFramework.ViewModels
         {
             MainText = "IT'S WORK!";
             MainText = parameter.ToString();
-            //throw new NotImplementedException();
         }
 
         public void NavigateFrom()
         {
-            //throw new NotImplementedException();
         }
 
         private string mainText;

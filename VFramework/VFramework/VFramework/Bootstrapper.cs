@@ -32,28 +32,12 @@ namespace VFramework
 
         public static Page GetMainPage()
         {
-            //var op = new MasterDetailPage
-            //{
-            //    MasterBehavior = MasterBehavior.Split,
-            //    Master = new Page
-            //    {
-            //        Title = "op"
-            //    },
-            //    Detail = new NavigationPage(new Page {Title = "op"})
-            //    { Title = "pop" }
-            //};
-            //var nav = new NavigationPage(op);
-
-            //nav.PushAsync(op);
             SimpleIoc.Default.GetInstance<INavigationAsyncService>().NavigateTo("Main");
             return SimpleIoc.Default.GetInstance<INavigationAsyncService>().NavigationPage;
-                //nav; //op; //new MainPage();//nav;
         }
 
         public static void Run()
         {
-            var op = 1;
-            //throw new NotImplementedException();
         }
     }
 }
