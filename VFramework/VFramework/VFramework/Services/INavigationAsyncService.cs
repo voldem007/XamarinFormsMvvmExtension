@@ -12,12 +12,8 @@ namespace VFramework.Services
         NavigationPage NavigationPage { get; set; }
         Task NavigateTo(string pageName, object parameter);
         Task NavigateTo(string pageName);
+        Task NavigateToModal(string pageName, object parameter);
+        Task NavigateToModal(string pageName);
         Task GoBack();
-    }
-
-    public interface INavigateAwareViewModel
-    {
-        void NavigateTo(object parameter);
-        void NavigateFrom();
     }
 }

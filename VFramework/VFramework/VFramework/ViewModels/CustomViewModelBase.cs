@@ -16,6 +16,7 @@ namespace VFramework.ViewModels
         {
             this.navigationAsyncService = SimpleIoc.Default.GetInstance<INavigationAsyncService>();
         }
+
         public Task NavigateTo<TViewModel>(object parameter)
         {
             return navigationAsyncService.NavigateTo(GetName(typeof(TViewModel)), parameter);
@@ -28,14 +29,19 @@ namespace VFramework.ViewModels
             return name.Remove(subIndex);
         }
 
-        public async Task NavigateToModal<TViewModel>(object parameter)
+        public Task NavigateTo<TViewModel>()
         {
-
+            return NavigateTo<TViewModel>(null);
         }
 
-        public Task NavigateTo<TViewModelT>()
+        public Task NavigateToModal<TViewModel>(object parameter)
         {
-            return NavigateTo<TViewModelT>(null);
+            return navigationAsyncService.NavigateToModal(GetName(typeof(TViewModel)), parameter);
+        }
+
+        public Task NavigateToModal<TViewModel>()
+        {
+            return NavigateToModal<TViewModel>(null);
         }
 
         public Task GoBack()

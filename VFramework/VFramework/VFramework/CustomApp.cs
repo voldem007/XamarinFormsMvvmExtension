@@ -11,7 +11,8 @@ namespace VFramework
     {
         public CustomApp()
         {
-            Bootstrapper.Run();
+            Bootstrapper.RegisterServices();
+            Bootstrapper.RegisterViewModels();
             MainPage = Bootstrapper.GetMainPage();
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VFramework.Interfaces;
 using Xamarin.Forms;
 
 namespace VFramework.Services
@@ -19,14 +20,47 @@ namespace VFramework.Services
             this.pageNameTemplate = pageNameTemplate;
         }
 
-        public async Task GoBack()
+        public Task NavigateToModal(string pageKey)
         {
-            await NavigationPage.PopAsync();
+            return NavigateToModal(pageKey, null);
         }
 
-        public async Task NavigateTo(string pageKey)
+        public Task GoBack()
         {
-            await NavigateTo(pageKey, null);
+            if (NavigationPage.Navigation.ModalStack.Count > 1)
+            {
+                return NavigationPage.Navigation.PopModalAsync();
+            }
+            else
+            {
+                return NavigationPage.Navigation.PopAsync();
+            }
+        }
+
+        public Task NavigateTo(string pageKey)
+        {
+            return NavigateTo(pageKey, null);
+        }
+
+        public async Task NavigateToModal(string pageKey, object parameter)
+        {
+            //NavigateTo
+            if (pageKey != String.Empty)
+            {
+                // use reflection to create page by key
+                string typeName = string.Format(pageNameTemplate, pageKey);
+                Type pageType = Type.GetType(typeName);
+                Page page = (Page)Activator.CreateInstance(pageType);
+
+                //call navigate method on view model
+                INavigateAwareViewModel nextVM = page.BindingContext as INavigateAwareViewModel;
+                if (nextVM != null)
+                {
+                    nextVM.NavigateTo(parameter);
+                }
+
+                await NavigationPage.Navigation.PushModalAsync(page);
+            }
         }
 
         public async Task NavigateTo(string pageKey, object parameter)
@@ -57,20 +91,20 @@ namespace VFramework.Services
                 }
 
                 // navigate to page from menu
-                //if (page is IDetailPage || (NavigationPage.CurrentPage != null && page is DealsPage))
-                //{
-                //    if (NavigationPage.CurrentPage.GetType() != page.GetType())
-                //    {
-                //        var firstPage = NavigationPage.Navigation.NavigationStack.ElementAt(0);
-                //        NavigationPage.Navigation.InsertPageBefore(page, firstPage);
-                //        await NavigationPage.Navigation.PopToRootAsync();
-                //    }
-                //}
-                // navigate to next page on ither case
-                //else
-                //{
-                   await NavigationPage.Navigation.PushAsync(page);
-                //}
+                if (page is IDetailPage)
+                {
+                    if (NavigationPage.CurrentPage.GetType() != page.GetType())
+                    {
+                        var firstPage = NavigationPage.Navigation.NavigationStack.ElementAt(0);
+                        NavigationPage.Navigation.InsertPageBefore(page, firstPage);
+                        await NavigationPage.Navigation.PopToRootAsync();
+                    }
+                }
+                //navigate to next page on other case
+                else
+                {
+                    await NavigationPage.Navigation.PushAsync(page);
+                }
             }
         }
     }

@@ -14,15 +14,11 @@ namespace VFramework
 {
     public static class Bootstrapper
     {
-        static Bootstrapper()
-        {
-            RegisterServices();
-            RegisterViewModels();
-        }
         public static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SecondViewModel>();
+            SimpleIoc.Default.Register<ModalViewModel>();
         }
 
         public static void RegisterServices()
@@ -34,10 +30,6 @@ namespace VFramework
         {
             SimpleIoc.Default.GetInstance<INavigationAsyncService>().NavigateTo("Main");
             return SimpleIoc.Default.GetInstance<INavigationAsyncService>().NavigationPage;
-        }
-
-        public static void Run()
-        {
         }
     }
 }

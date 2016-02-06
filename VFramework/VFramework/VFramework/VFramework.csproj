@@ -40,16 +40,21 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="CustomApp.cs" />
-    <Compile Include="Locator\ViewModelLocator.cs" />
+    <Compile Include="Interfaces\IDetailPage.cs" />
+    <Compile Include="Interfaces\INavigateAwareViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\INavigationAsyncService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="ViewModels\CustomViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ModalViewModel.cs" />
     <Compile Include="ViewModels\SecondViewModel.cs" />
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalPage.xaml.cs">
+      <DependentUpon>ModalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SecondPage.xaml.cs">
       <DependentUpon>SecondPage.xaml</DependentUpon>
@@ -99,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ModalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

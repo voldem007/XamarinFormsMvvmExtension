@@ -7,5 +7,6 @@
   <StackLayout>
     <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
     <Button Text="Back up, back up Tell me what you're gonna do now" Command="{Binding GoBackCommand}" />
+    <Button Text="Go to modal" Command="{Binding GoModalCommand}" />
   </StackLayout>
 </views:CustomContentPage>
