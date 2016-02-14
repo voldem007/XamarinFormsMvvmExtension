@@ -23,7 +23,7 @@ namespace VFramework
 
         public static void RegisterServices()
         {
-            SimpleIoc.Default.Register<INavigationAsyncService>(() => new NavigationService(new NavigationPage(), "VFramework.Views.{0}Page"));
+            SimpleIoc.Default.Register<INavigationAsyncService>(() => new NavigationService(new NavigationPage()));
         }
 
         public static Page GetMainPage()
