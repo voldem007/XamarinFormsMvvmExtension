@@ -49,6 +49,11 @@ namespace VFramework.ViewModels
             return navigationAsyncService.GoBack();
         }
 
+        public Task GoBackModal()
+        {
+            return navigationAsyncService.GoBackModal();
+        }
+
         public async Task SendNotifyTo<TViewModel>()
         {
             

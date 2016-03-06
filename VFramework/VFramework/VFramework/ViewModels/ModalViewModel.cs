@@ -19,7 +19,7 @@ namespace VFramework.ViewModels
 
         public ICommand DiscardCommand
         {
-            get { return new Command(async ()=> await GoBack());}
+            get { return new Command(async () => await GoBackModal());}
         }
         public void NavigateTo(object parameter)
         {

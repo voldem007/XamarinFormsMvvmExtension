@@ -15,5 +15,6 @@ namespace VFramework.Services
         Task NavigateToModal(string pageName, object parameter);
         Task NavigateToModal(string pageName);
         Task GoBack();
+        Task GoBackModal();
     }
 }

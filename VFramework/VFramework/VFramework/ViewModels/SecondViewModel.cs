@@ -41,7 +41,15 @@ namespace VFramework.ViewModels
 
         public ICommand GoModalCommand
         {
-            get { return new Command(async () => { await NavigateToModal<ModalViewModel>(); }); }
+            get
+            {
+                return new Command(async () =>
+                {
+                    await NavigateToModal<ModalViewModel>();
+                    //execute after discard modal view
+                    // after discard modal view, some code are executing
+                });
+            }
         }
     }
 }
